@@ -8,3 +8,11 @@ script: script/cibuild
 
 notifications:
   email: false
+after_success:
+  - git clone https://github.com/xxxx/xxxx.github.io.git
+  - cd xxx.github.io && rm -rf * && cp -r ../_site/* .
+  - git config user.name "xxxx"
+  - git config user.email "xxxx@gmail.com"
+  - git add --all .
+  - git commit -m "Travis CI Auto Builder"
+  - git push --force https://$DEPLOY_TOKEN@github.com/xxxx/blog.git master
